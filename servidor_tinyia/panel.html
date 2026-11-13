@@ -1,0 +1,119 @@
+<!doctype html>
+<html lang="es">
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Cinta · Capturas Tiny IA</title>
+<style>
+*{box-sizing:border-box}body{font:16px system-ui;margin:0;background:#eef2f4;color:#172e38}main{max-width:1200px;margin:auto;padding:28px}h1{margin:0 0 8px;font-size:30px}h2{font-size:20px}p{line-height:1.5}.muted{color:#526974}section{background:white;border:1px solid #d3dfe4;border-radius:12px;padding:20px;margin:18px 0}button,input,select,textarea{font:inherit;border-radius:6px;padding:8px;border:1px solid #a5b7c0}button{cursor:pointer;background:#12586a;color:white}button.secondary{background:white;color:#12586a}button:disabled{opacity:.5;cursor:default}.bar,.form{display:flex;gap:12px;flex-wrap:wrap;align-items:end}label{display:grid;gap:5px;font-size:14px}textarea{min-width:280px}table{width:100%;border-collapse:collapse;font-size:14px}th,td{text-align:left;padding:10px;border-bottom:1px solid #e0e7ea}tr.selected{background:#e1f2f4}.scroll{overflow:auto}#status{min-height:24px;color:#12586a}.error{color:#a12020!important}svg{width:100%;height:210px;background:#f5f9fa;border-radius:8px}.pill{display:inline-block;border-radius:15px;padding:3px 8px;background:#e7f1f3;font-size:12px}pre{white-space:pre-wrap;font-size:13px}.stats{font-size:18px;font-weight:600}#detalle[hidden]{display:none}
+</style>
+<main>
+<h1>Cinta clasificadora</h1>
+<p class="muted">Capturas por objeto · calidad de señal del inductivo y el ultrasonido</p>
+<section>
+<div class="bar"><button id="conectar">Actualizar</button><button class="secondary" id="jsonl">Descargar JSONL</button><button class="secondary" id="csv">Descargar CSV</button></div>
+<p id="status" role="status">Esperando conexión…</p>
+<p id="ayudaConexion" class="muted" hidden>Dejá <code>python servidor.py</code> ejecutándose. En esta PC, abrí <a href="http://127.0.0.1:8000/">el panel del servidor</a>; el archivo HTML abierto directamente no recibe capturas.</p>
+<div id="resumen" class="stats"></div>
+</section>
+<section><h2>Ensayo manual · cinta detenida</h2>
+<p>Activá el modo manual, colocá la pieza y pulsá <strong>Iniciar prueba</strong>. Tenés <strong>10 segundos para prepararte</strong>. Cuando aparezca <strong>Registrando</strong>, disponés de <strong>otros 10 segundos de captura continua</strong> para provocar la condición. La cinta permanece detenida.</p>
+<div class="bar"><label>ESP32<select id="placaEnsayo"></select></label><button id="modoManual" disabled>Activar modo manual</button><button id="iniciarEnsayo" disabled>Iniciar prueba</button><button class="secondary" id="modoAutomatico" disabled>Volver a automático</button></div>
+<p id="estadoEnsayo" role="status">Esperando firmware con control de ensayos…</p>
+<button class="secondary" id="verEnsayo" disabled>Ver última prueba completa</button>
+<p class="muted">Se guardan 100 muestras como UNA prueba de 10 segundos, con UNA etiqueta para toda la señal. La Tiny IA analiza las 100 muestras juntas. Usá el mismo ID físico al repetir la misma pieza. Si se pierde la conexión, el registro continúa localmente y la cinta permanece en modo manual hasta volver a automático o reiniciar la ESP32.</p></section>
+<section><h2>Capturas recibidas</h2><p class="muted">Elegí una captura y etiquetá según lo observado. La etiqueta no se deduce del material. Actualización cada 3 segundos.</p>
+<div class="scroll"><table><thead><tr><th>ID / ciclo</th><th>Recibida</th><th>Inductivo</th><th>Muestras</th><th>Etiqueta</th><th>Pieza física</th><th></th></tr></thead><tbody id="filas"></tbody></table></div>
+<div class="bar" style="margin-top:12px"><button class="secondary" id="anterior">Más recientes</button><span id="pagina"></span><button class="secondary" id="siguiente">Más antiguas</button></div></section>
+<section id="detalle" hidden><h2 id="titulo"></h2><p id="contexto" class="muted"></p>
+<p id="advertencias" style="color:#805600;background:#fff5db;padding:12px;border-radius:6px" hidden></p>
+<svg id="grafico" viewBox="0 0 1000 210" role="img" aria-label="Distancia ultrasónica e inductivo a lo largo de la prueba completa de cien muestras"></svg>
+<p class="muted">Azul: distancia (0–200 cm). Verde: inductivo activo. Cruces rojas: sin eco. El tiempo se mide desde la primera muestra.</p>
+<div class="form"><label>Etiqueta<select id="etiqueta"><option value="">Sin etiquetar</option><option>senal_normal</option><option>senal_intermitente</option><option>senal_anomala</option><option>descartar</option></select></label>
+<label>ID de la pieza física<input id="pieza" placeholder="Ej.: lata_01" maxlength="80"></label><label>Material observado<select id="material"><option value="">Elegir…</option><option value="metalico">Metálico</option><option value="no_metalico">No metálico</option></select></label>
+<label>Notas<textarea id="notas" rows="2" maxlength="1000" placeholder="Posición, repetición, condición provocada…"></textarea></label><button id="guardar">Guardar etiqueta</button><button id="eliminar" style="background:#a12020">Eliminar captura</button></div>
+<p class="muted">Usá el mismo ID al repetir una pieza. Incluí metálicos y no metálicos en cada condición. Un inductivo inactivo por sí solo no indica una falla; la entrada y salida normales de la pieza tampoco son intermitencias. Las etiquetas antiguas de contacto deben revisarse manualmente.</p>
+<p class="muted"><strong>Normal:</strong> evolución esperada durante el paso. <strong>Intermitente:</strong> pérdidas y recuperaciones repetidas mientras la pieza sigue en la zona. <strong>Anómala:</strong> saltos de distancia o activaciones espurias incompatibles con el paso observado. Si se superponen, anómala tiene prioridad; si no podés distinguirlas, descartá el ensayo. Evaluá el patrón de la prueba completa de diez segundos. Las pérdidas y recuperaciones pueden estar separadas por varios segundos.</p>
+<details><summary>Datos originales</summary><pre id="raw"></pre></details></section>
+</main>
+<script>
+const $=id=>document.getElementById(id);let offset=0,seleccion=null,actual=null,ocupado=false;
+let placasEnsayo=[],consultandoEnsayo=false,enviandoEnsayo=false,servidorEnsayoComprobado=false;
+function placaElegida(){return placasEnsayo.find(d=>d.device_id===$('placaEnsayo').value)}
+function dibujarEnsayo(){
+ const d=placaElegida(),conectada=d&&d.conectada;
+ $('modoManual').disabled=enviandoEnsayo||!conectada||d.deseado;
+ $('iniciarEnsayo').disabled=enviandoEnsayo||!conectada||!d.deseado||!d.manual||!d.lista||d.ocupada||d.pendiente||!d.registro_total_ms;
+ $('modoAutomatico').disabled=enviandoEnsayo||!conectada||!d.deseado||d.ocupada||d.pendiente;
+ $('verEnsayo').disabled=!d||!d.orden;
+ $('estadoEnsayo').textContent=!d?'Sin ESP32 disponible. Cargá el firmware actualizado y esperá la conexión Wi-Fi.':!conectada?'ESP32 sin conexión reciente. No se pueden iniciar pruebas.':d.manual!==d.deseado?'Esperando confirmación de cambio de modo…':!d.manual?'Automático: la detección puede arrancar la cinta.':d.restante_ms>0?'Preparación: captura en '+(d.restante_ms/1000).toFixed(1)+' s · orden '+d.orden:d.ocupada?'Registrando: quedan '+((d.registro_restante_ms||0)/1000).toFixed(1)+' s de '+((d.registro_total_ms||0)/1000)+' s · orden '+d.orden:d.pendiente?'Solicitud enviada; esperando cuenta regresiva de la ESP32…':!d.registro_total_ms?'La ESP32 todavía tiene el firmware de captura corta. Compilá y cargá la versión de registro continuo (10 s).':!d.lista?'Modo manual: esperando centrado del servo e historial de sensores.':'Modo manual listo · cinta detenida. Última orden aceptada: '+d.orden+'. Revisá la prueba completa.'+(d.feature_version===2?'':' Firmware de bloques: el servidor reunirá los diez; actualizá la ESP32 para inferencia de 100 muestras.');
+}
+async function actualizarEnsayos(){
+ if(consultandoEnsayo)return;consultandoEnsayo=true;
+ try{
+  if(!servidorEnsayoComprobado){
+   const salud=await(await api('/health')).json();
+   if(!(salud.ensayo_max_preparacion_ms>=60000)||salud.feature_version!==2||salud.muestras_por_prueba!==100)throw Error('El servidor Python sigue ejecutando una versión anterior. Reiniciá servidor.py para admitir una prueba de cien muestras; recargar la página no actualiza Python.');
+   servidorEnsayoComprobado=true;
+  }
+  placasEnsayo=await(await api('/api/ensayos')).json();
+  const anterior=$('placaEnsayo').value;$('placaEnsayo').replaceChildren();
+  for(const d of placasEnsayo){const o=document.createElement('option');o.value=d.device_id;o.textContent=d.device_id+(d.conectada?' · conectada':' · sin conexión');$('placaEnsayo').append(o)}
+  $('placaEnsayo').value=placasEnsayo.some(d=>d.device_id===anterior)?anterior:(placasEnsayo.find(d=>d.conectada)?.device_id||placasEnsayo[0]?.device_id||'');
+  dibujarEnsayo();
+ }catch(e){servidorEnsayoComprobado=false;placasEnsayo=[];dibujarEnsayo();$('estadoEnsayo').textContent=e.message}finally{consultandoEnsayo=false}
+}
+async function ordenarEnsayo(accion){
+ const d=placaElegida();if(!d||enviandoEnsayo)return;
+ if(accion==='automatico'&&!confirm('¿Volver al modo automático? Retirá la pieza primero: si hay un objeto, la cinta podrá arrancar.'))return;
+ enviandoEnsayo=true;dibujarEnsayo();
+ try{await api('/api/ensayos',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({device_id:d.device_id,boot_id:d.boot_id,accion})});await actualizarEnsayos()}
+ catch(e){$('estadoEnsayo').textContent=e.message}
+ finally{enviandoEnsayo=false;/* El siguiente sondeo habilita los botones con estado confirmado. */}
+}
+function iniciarSondeoEnsayos(){actualizarEnsayos();setInterval(actualizarEnsayos,500)}
+$('placaEnsayo').onchange=dibujarEnsayo;
+$('modoManual').onclick=()=>ordenarEnsayo('manual');
+$('iniciarEnsayo').onclick=()=>ordenarEnsayo('capturar');
+$('modoAutomatico').onclick=()=>ordenarEnsayo('automatico');
+$('verEnsayo').onclick=()=>{const d=placaElegida();if(d&&d.orden)verPruebaCompleta(d.device_id,d.boot_id,d.orden)};
+async function verPruebaCompleta(device,boot,orden){
+ try{
+  const rows=await(await api('/api/ensayos/capturas?device_id='+encodeURIComponent(device)+'&boot_id='+encodeURIComponent(boot)+'&orden_manual='+orden)).json();
+  const completa=rows.find(r=>r.payload.feature_version===2&&r.payload.samples.length===100);
+  if(!completa){status('La prueba completa todavía no llegó. Si se envía por bloques, deben llegar los diez sin huecos. Volvé a consultar al terminar.',true);return}
+  mostrar(completa);status('Prueba completa: 100 muestras, una sola etiqueta.');
+ }catch(e){status(e.message,true)}
+}
+iniciarSondeoEnsayos();
+function status(text,error=false){$('status').textContent=text;$('status').className=error?'error':'';$('ayudaConexion').hidden=!error}
+async function api(path,options={}){
+ if(location.protocol!=='http:'&&location.protocol!=='https:')throw Error('Abriste el archivo HTML directamente. Entrá al panel en http://127.0.0.1:8000/ con el servidor Python abierto.');
+ const controller=new AbortController(),timer=setTimeout(()=>controller.abort(),8000);let r;
+ try{r=await fetch(path,{...options,signal:controller.signal,cache:'no-store'})}
+ catch(e){if(e.name==='AbortError')throw Error('El servidor '+location.origin+' no respondió en 8 segundos. Revisá su terminal y volvé a intentar.');throw Error('No se pudo conectar con '+location.origin+'. Verificá que servidor.py siga ejecutándose; la página reintentará automáticamente.')}
+ finally{clearTimeout(timer)}
+ if(!r.ok){let msg='HTTP '+r.status;try{msg=(await r.json()).error||msg}catch{}throw Error(msg)}return r
+}
+function celda(tr,value){const td=document.createElement('td');td.textContent=value;tr.append(td);return td}
+async function actualizar(){if(ocupado)return;ocupado=true;try{const [s,rows]=await Promise.all([(await api('/api/resumen')).json(),(await api('/api/capturas?limit=50&offset='+offset)).json()]);$('resumen').textContent=s.total+' capturas · '+(s.clases['']||0)+' sin etiquetar · '+Object.entries(s.clases).filter(([k])=>k).map(([k,v])=>k+': '+v).join(' · ');$('filas').replaceChildren();for(const r of rows){const tr=document.createElement('tr');if(r.id===seleccion)tr.className='selected';celda(tr,r.id+' / '+r.cycle_id+(r.payload.origen==='manual'?' · manual #'+r.payload.orden_manual:''));celda(tr,new Date(r.recibida).toLocaleString());celda(tr,r.payload.metal?'Metal memorizado':'Sin metal memorizado');celda(tr,r.payload.samples.length+(r.no_apta?' · revisar':''));celda(tr,r.etiqueta||'Pendiente');celda(tr,r.pieza_id||'—');const b=document.createElement('button');b.textContent='Revisar';b.onclick=()=>mostrar(r);celda(tr,'').append(b);$('filas').append(tr)}$('pagina').textContent=(offset+1)+'–'+(offset+rows.length)+' de '+s.total;$('anterior').disabled=offset===0;$('siguiente').disabled=offset+rows.length>=s.total;status(s.ultima?'Última captura: '+new Date(s.ultima).toLocaleString():'Servidor listo. Esperando capturas de la ESP32.')}catch(e){status(e.message,true)}finally{ocupado=false}}
+function mostrar(r){actual=r;seleccion=r.id;$('detalle').hidden=false;$('titulo').textContent='Captura '+r.id+' · ciclo '+r.cycle_id;$('guardar').disabled=!!r.no_apta;$('contexto').textContent=r.payload.device_id+' · '+r.payload.firmware+(r.no_apta?' · No apta para entrenar: '+r.no_apta:' · Prueba completa: 100 muestras / 10 s / una etiqueta');$('advertencias').textContent=(r.advertencias||[]).join(' ');$('advertencias').hidden=!(r.advertencias||[]).length;$('etiqueta').value=r.etiqueta;$('pieza').value=r.pieza_id;$('material').value=r.material;$('notas').value=r.notas;$('raw').textContent=JSON.stringify(r.payload,null,2);dibujar(r.payload.samples)}
+function dibujar(samples,svg=$('grafico')){svg.replaceChildren();const ns='http://www.w3.org/2000/svg';function el(tag,attrs,text){const e=document.createElementNS(ns,tag);for(const [k,v]of Object.entries(attrs))e.setAttribute(k,v);if(text!==undefined)e.textContent=text;svg.append(e);return e}const t0=samples[0].t_ms,span=Math.max(900,samples.at(-1).t_ms-t0);el('line',{x1:45,y1:155,x2:970,y2:155,stroke:'#99adb8'});let previous=null,indice=0;const cada=Math.max(1,Math.ceil(samples.length/10));for(const s of samples){const x=45+925*(s.t_ms-t0)/span;if(s.dist_cm!==null){const y=155-135*Math.min(200,s.dist_cm)/200;if(previous&&s.t_ms-previous.t<=160)el('line',{x1:previous.x,y1:previous.y,x2:x,y2:y,stroke:'#1676af','stroke-width':2});el('circle',{cx:x,cy:y,r:4,fill:'#1676af'});previous={x,y,t:s.t_ms}}else{el('text',{x:x-4,y:100,fill:'#c23232'},'×');previous=null}el('rect',{x:x-5,y:s.inductivo?165:185,width:10,height:s.inductivo?25:5,fill:s.inductivo?'#19865c':'#b9c7cb'});if(indice++%cada===0||indice===samples.length)el('text',{x:x-10,y:207,'font-size':12,fill:'#526974'},((s.t_ms-t0)/1000).toFixed(1)+' s')}el('text',{x:4,y:24,'font-size':12},'200');el('text',{x:20,y:155,'font-size':12},'0')}
+$('guardar').onclick=async()=>{if(!actual)return;const id=actual.id;$('guardar').disabled=true;try{await api('/api/capturas/'+id+'/etiqueta',{method:'POST',headers:{'Content-Type':'application/json'},body:JSON.stringify({etiqueta:$('etiqueta').value,pieza_id:$('pieza').value,material:$('material').value,notas:$('notas').value})});mostrar(await(await api('/api/capturas/'+id)).json());await actualizar();status('Etiqueta guardada para captura '+id)}catch(e){status(e.message,true)}finally{$('guardar').disabled=false}};
+async function eliminarSeleccionada(){
+ if(!actual)return;
+ const id=actual.id;
+ if(!confirm('¿Eliminar la captura '+id+' (ciclo '+actual.cycle_id+')? Se borrarán sus muestras y su etiqueta. Esta acción no se puede deshacer.'))return;
+ $('eliminar').disabled=true;
+ try{
+  await api('/api/capturas/'+id,{method:'DELETE'});
+  if(seleccion===id){actual=null;seleccion=null;$('detalle').hidden=true}
+  offset=0;
+  await actualizar();
+  status('Captura '+id+' eliminada.');
+ }catch(e){status(e.message,true)}finally{$('eliminar').disabled=false}
+}
+$('eliminar').onclick=eliminarSeleccionada;
+async function descargar(ext){try{const blob=await(await api('/api/exportar.'+ext)).blob(),url=URL.createObjectURL(blob),a=document.createElement('a');a.href=url;a.download='capturas.'+ext;a.click();setTimeout(()=>URL.revokeObjectURL(url),1000)}catch(e){status(e.message,true)}}
+$('jsonl').onclick=()=>descargar('jsonl');$('csv').onclick=()=>descargar('csv');$('conectar').onclick=actualizar;$('anterior').onclick=()=>{offset=Math.max(0,offset-50);actualizar()};$('siguiente').onclick=()=>{offset+=50;actualizar()};actualizar();setInterval(actualizar,3000);
+</script>
+</html>
+

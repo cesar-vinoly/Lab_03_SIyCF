@@ -1,0 +1,4 @@
+# Mas espacio para la aplicacion con Wi-Fi/HTTP, sin cambiar el offset de NVS ni de factory.
+# 1500 KiB de app; compatible con los 2 MiB configurados en este proyecto.
+CONFIG_PARTITION_TABLE_SINGLE_APP_LARGE=y
+

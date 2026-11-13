@@ -1,0 +1,10 @@
+{
+  "source": "lata_01.step",
+  "source_sha256": "3af5fe789aa503e52ff5955c6ee5b05799f4c4a90e08567883c006af90e9084e",
+  "output_sha256": "fe4ee463f4d964e744776205e3c327fd99d7824807ff86e6537b23106aa4e9c5",
+  "converter": "OpenCascade / cadquery-ocp 7.9.3.1.1",
+  "linear_deflection_mm": 0.05,
+  "angular_deflection_rad": 0.25,
+  "coordinates": "Z up; meters; preserve assembly placements",
+  "colors": "XCAF surface/part colors, linear RGB in glTF; no Lab 1 palette overrides"
+}

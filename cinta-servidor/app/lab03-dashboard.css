@@ -1,0 +1,22 @@
+.lab03-auto{display:flex;gap:10px;align-items:flex-start;font-size:14px;font-weight:600;padding:14px;background:var(--panel-suave);border-radius:8px;margin-bottom:20px}
+.lab03-auto input{width:19px;height:19px;accent-color:var(--real);margin-top:1px;flex-shrink:0}
+.lab03-auto small{display:block;color:var(--texto-2);font-weight:400;font-size:11px;line-height:1.5;margin-top:5px}
+.lab03-banner{padding:14px 18px;border-radius:8px;background:var(--alarma);color:white;font-weight:600}
+.lab03-stat-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:18px;margin-bottom:20px}
+.lab03-stat-grid span,.lab03-stat-grid small{display:block;font-size:12px;color:var(--texto-2)}
+.lab03-stat-grid strong{display:block;font-size:24px;color:var(--real);font-variant-numeric:tabular-nums;margin:4px 0}
+.lab03-values{display:grid;grid-template-columns:minmax(0,1fr) auto;gap:10px 15px;font-size:12px;margin:15px 0}
+.lab03-values>div{display:contents}.lab03-values dt{color:var(--texto-2)}.lab03-values dd{text-align:right;font-weight:600;overflow-wrap:anywhere}
+.lab03-ia-vote{font-size:36px;font-weight:650;color:var(--real);margin:20px 0}.lab03-ia-vote small{display:block;font-size:12px;font-weight:400;color:var(--texto-2)}
+.lab03-alerts{list-style:none;padding:0;margin:10px 0 0;max-height:330px;overflow-y:auto;font-size:12px}
+.lab03-alerts li{display:flex;gap:12px;padding:10px 0;border-bottom:1px solid var(--linea-suave)}.lab03-alerts time{color:var(--texto-2);font-variant-numeric:tabular-nums;flex-shrink:0}
+.lab03-form{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:14px;align-items:end;margin:16px 0}
+.lab03-form label{display:grid;gap:7px;font-size:12px;color:var(--texto-2)}.lab03-form input{width:100%;min-width:0;min-height:40px;padding:8px 10px;border:1px solid var(--linea);border-radius:7px;background:var(--btn-fondo);color:var(--texto)}
+.lab03-results{max-width:650px;padding:15px;border-radius:8px;background:var(--panel-suave)}
+.lab03-actions{display:flex;gap:10px;flex-wrap:wrap}.lab03-report{max-height:320px;margin-top:15px}
+.lab03 details summary{font-weight:600;font-size:14px;cursor:pointer}.lab03 .trend+.trend{margin-top:18px}.lab03 .panel-heading{flex-wrap:wrap}
+.lab03 .mando-panel>.btn{margin-bottom:10px}.lab03 .mando-panel .respuesta{margin-top:12px}
+/* Igualar los paneles de la fila. El visor compensa su campo vertical al
+   redimensionarse para que los mensajes del mando no produzcan zoom. */
+.lab03 .viewer-panel{align-self:stretch}
+@media(max-width:600px){.lab03-stat-grid{gap:12px}.lab03-stat-grid strong{font-size:20px}.lab03 .panel-heading{align-items:flex-start}.lab03-values{font-size:11px}}
