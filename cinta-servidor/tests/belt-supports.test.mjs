@@ -236,7 +236,7 @@ test('textura original: seis exclusiones anteriores más inductivo y MG996R, inc
     else assert.equal(node.material,gray);
   });
   // Los soportes mecánicos de ambos dispositivos sí reciben la textura.
-  for(const name of ['Soporte_Servo_Cinta_simplificado:1','soporte_con_agujeros:1']){
+  for(const name of ['Soporte Servo:1','soporte_con_agujeros:1']){
     let support;root.traverse(node=>{if(node.userData.name===name)support=node;});
     assert.ok(support,name);
     support.traverse(node=>{if(node.isMesh)assert.equal(node.material,gray);});

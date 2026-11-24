@@ -39,7 +39,9 @@ test('una sola interfaz, un mando, visor y todos los paneles; sin lateral hereda
     assert.doesNotMatch(html,/Velocidad inicial \(%\)|Velocidad mínima \(%\)|Velocidad máxima \(%\)/);
     assert.match(html,/TS orden 1/);
     assert.doesNotMatch(html,/Registro de eventos|Conexión WebSocket de la ESP32|websocket-help|class="registro"|Consultar estado|IP_DE_TU_PC/);
-    assert.match(html,/Distancia directa del sensor; corrección inicial: 0 cm/);
+    assert.match(html,/Corrección visual activa: \+1[.,]25 cm/);
+    assert.match(html,/una lectura de 8,6 cm se representa a 9,85 cm/);
+    assert.match(html,/<input[^>]*step="0\.01"[^>]*value="1\.25"/);
     assert.equal((html.match(/class="trend"/g)||[]).length,2);
     assert.equal((html.match(/type="checkbox"/g)||[]).length,2); // Clasificación y cuadrícula.
     for(const label of ['Acercar','Alejar','Encuadrar conjunto','Restablecer vista','Mostrar cuadrícula'])assert.ok(html.includes('aria-label="'+label+'"'),label);

@@ -13,8 +13,8 @@ async function load(file='Soportes.glb') {
 }
 function meshes(root){const all=[];root.traverse(x=>{if(x.isMesh)all.push(x);});return all;}
 
-test('soportes y pala sin materiales usan COLOR_0 difuso, con caras visibles y sombreado válido',async()=>{
-  for(const file of ['Soportes.glb','Pala_servo.glb']){
+test('soportes originales sin materiales usan COLOR_0 difuso, con caras visibles y sombreado válido',async()=>{
+  for(const file of ['Soportes.glb']){
     const {scene,parser}=await load(file);
     assert.ok(!parser.json.materials?.length);
     const original=meshes(scene).map(mesh=>[mesh,mesh.geometry,mesh.geometry.getAttribute('color').array.slice()]);
@@ -28,6 +28,19 @@ test('soportes y pala sin materiales usan COLOR_0 difuso, con caras visibles y s
       assert.deepEqual(mesh.geometry.getAttribute('color').array,colors);
     }
   }
+});
+
+test('pala actualizada conserva materiales STEP y corresponde al archivo fuente',async()=>{
+  const {scene,bytes,parser}=await load('Pala_servo.glb');
+  const step=await readFile(new URL('../modelos_fuente/Pala.step',import.meta.url));
+  const metadata=JSON.parse(await readFile(new URL('../modelos_fuente/Pala_servo.conversion.json',import.meta.url),'utf8'));
+  assert.equal(createHash('sha256').update(step).digest('hex'),metadata.source_sha256);
+  assert.equal(createHash('sha256').update(bytes).digest('hex'),metadata.output_sha256);
+  assert.ok(parser.json.materials.length>0);
+  const before=meshes(scene).map(m=>m.material);
+  prepareCadMaterials(scene,true);
+  assert.deepEqual(meshes(scene).map(m=>m.material),before);
+  for(const material of parser.json.materials)assert.equal(material.pbrMetallicRoughness.metallicFactor,0);
 });
 
 test('un GLB con materiales explícitos conserva su acabado metálico',()=>{

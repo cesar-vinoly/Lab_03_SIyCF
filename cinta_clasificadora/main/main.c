@@ -5,6 +5,7 @@
 #include "captura.h"
 #include "red.h"
 #include "tiny_ia.h"
+#include "pantalla.h"
 #include "lab03_runtime.h"
 #include "seguridad.h"
 #include <math.h>
@@ -162,6 +163,7 @@ static void paso_control(int64_t ahora_us,float dt_s,bool muestrear,lab_snapshot
         .metal=bajo,.encoder_valido=valida,.direccion=marcha?direccion:0,.porcentaje=porcentaje,
         .encoder_rechazados=encoder_rechazados(),.objeto=objeto,
         .estado=seguridad.enclavada?LAB_FALLA:(automatico?(lab_estado_t)ciclo.estado:(marcha?LAB_TRANSPORTANDO:LAB_ESPERA))};
+    if (muestrear) pantalla_publicar(s, ahora_us);
     if (ahora_ms-ultimo_log_ms>=1000) {
         ESP_LOGI(TAG,"modo=%s estado=%d | dist_cm=%.1f metal=%d STEP=%u Hz RPM_motor=%.1f valida=%d RPM_TS=%.1f servo=%.1f WS=%s emergencia=%d",
             ensayo_manual?"ENSAYO":automatico?"AUTO":"DIRECTO",ciclo.estado,(double)cm,bajo,hz,
@@ -184,6 +186,7 @@ void app_main(void)
     }
 #else
     red_iniciar();
+    pantalla_iniciar();
     lab_hooks_t hooks={.iniciar_control=iniciar_control,.paso_control=paso_control,.parar=detener,
         .red_lista=red_lista,.ws_uri=red_gemelo_uri(),.device_id=red_device_id(),.boot_id=red_boot_id()};
     ESP_LOGI(TAG,"Gemelo: %s",hooks.ws_uri); ESP_ERROR_CHECK(lab03_iniciar(&hooks));

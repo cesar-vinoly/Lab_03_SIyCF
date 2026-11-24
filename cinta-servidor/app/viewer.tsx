@@ -29,7 +29,7 @@ import {createViewportSizer} from './viewport-size';
 import {alignClassifierModel,createServoPaddle,SERVO_SWEEP_DEG} from './servo-paddle';
 
 type View = 'perspective'|'top'|'side';
-type Part = 'base'|'supports'|'belt'|'paddle'|'lata'|'caja'|RotorId;
+type Part = 'base'|'supports'|'belt'|'paddle'|'chute'|'lata'|'caja'|RotorId;
 type ViewerState = {grid:boolean; view:View};
 type Engine = {
   transmission: Transmission;
@@ -44,8 +44,9 @@ type Engine = {
 type ModelContext = {registerTool:(tool:{name:string;title:string;description:string;inputSchema:object;annotations:{readOnlyHint:boolean};execute:(input:unknown)=>unknown},options:{signal:AbortSignal})=>void|Promise<void>};
 const viewLabels: Record<View,string> = {perspective:'Perspectiva',top:'Superior',side:'Lateral'};
 const MODELS: {id:Part;url:string}[] = [
-  {id:'base',url:'/models/base.glb'}, {id:'supports',url:'/models/Soportes_fusion.glb'},
-  {id:'paddle',url:'/models/Pala_servo.glb'},
+  {id:'base',url:'/models/base.glb'}, {id:'supports',url:'/models/Soportes_fusion.glb?v=20261123'},
+  {id:'paddle',url:'/models/Pala_servo.glb?v=20261123'},
+  {id:'chute',url:'/models/Canaleta.glb?v=20261123'},
   ...ROTORS.map(spec=>({id:spec.id,url:'/models/'+spec.file})),
   {id:'belt',url:'/models/correa.glb'},
   {id:'lata',url:'/models/lata_01.glb'}, {id:'caja',url:'/models/caja_01.glb'},
@@ -122,7 +123,7 @@ export default function ConveyorViewer({motion,objectPosition=null,objectKind=nu
     renderer.toneMappingExposure=1.12;
     renderer.shadowMap.enabled=true;
     renderer.shadowMap.type=THREE.PCFSoftShadowMap;
-    renderer.domElement.setAttribute('aria-label','Modelo 3D de la cinta con base, soportes, engranajes, rodillos, encoder, correa, sensor inductivo y pala del servo. Usá el mouse, los gestos táctiles o los botones de vista para explorarlo.');
+    renderer.domElement.setAttribute('aria-label','Modelo 3D de la cinta con base, soportes, engranajes, rodillos, encoder, correa, sensor inductivo, pala del servo y canaleta de salida. Usá el mouse, los gestos táctiles o los botones de vista para explorarlo.');
     renderer.domElement.setAttribute('role','img');
     renderer.domElement.tabIndex=0;
     container.appendChild(renderer.domElement);
@@ -200,7 +201,7 @@ export default function ConveyorViewer({motion,objectPosition=null,objectKind=nu
         prepareCadMaterials(gltf.scene,Boolean(gltf.parser.json.materials?.length));
         pieceModels[part]=gltf.scene;return; // Agregar DESPUÉS del encuadre, sin cambiar cámara ni ensamble.
       }
-      if (part==='supports'||part==='paddle') {
+      if (part==='supports'||part==='paddle'||part==='chute') {
         prepareCadMaterials(gltf.scene,Boolean(gltf.parser.json.materials?.length));
       }
       const spec=ROTORS.find(rotor=>rotor.id===part);
@@ -226,7 +227,7 @@ export default function ConveyorViewer({motion,objectPosition=null,objectKind=nu
         }
       });
       let object:THREE.Object3D=spec?transmission.add(gltf.scene,spec):gltf.scene;
-      if(part==='supports')object=alignClassifierModel(gltf.scene);
+      if(part==='supports'||part==='chute')object=alignClassifierModel(gltf.scene);
       if(part==='paddle'){
         paddle=createServoPaddle(gltf.scene);object=paddle.group;
         if(engine.current)engine.current.paddle=paddle;

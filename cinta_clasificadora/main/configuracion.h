@@ -12,6 +12,21 @@
 #define PIN_SERVO                16
 #define PIN_INDUCTIVO            34  /* Entrada con pull-up EXTERNO a 3,3 V. */
 
+/* OLED SSD1306 128x64: mismo cableado y calibracion visual del Lab 1.
+ * Estas constantes solo afectan la pantalla, no el control ni el gemelo. */
+#define PIN_OLED_SDA             21
+#define PIN_OLED_SCL             22
+#define OLED_DIRECCION           0x3C
+#define OLED_I2C_HZ              400000
+#define OLED_PERIODO_MS          200
+#define OLED_REINTENTO_MS        5000
+#define OLED_DATOS_VENCIDOS_MS   1000
+#define OLED_DIAMETRO_RODILLO_MM 29.5f
+#define OLED_OFFSET_HC_CM        4.0f
+#define OLED_LONGITUD_BANDA_CM   45.0f
+#define OLED_ERROR_LIMITE_PCT    15.0f
+#define OLED_REGIMEN_MS          1500
+
 /* Clasificación de una pieza por ciclo. Distancias desde el transductor. */
 #define DISTANCIA_ENTRADA_CM     12.0f
 /* Caida no metalicos: 44,6-47,5 cm. Margen hasta 60 cm; excluye silla a 114 cm. */

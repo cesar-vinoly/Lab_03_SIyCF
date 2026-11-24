@@ -2,7 +2,7 @@ import {useEffect,useState} from 'react';
 import ConveyorViewer from './viewer';
 import DirectSpeed from './direct-speed';
 import {stoppedMotion} from './lab03-motion';
-import {piecePosition} from './piece-models';
+import {piecePosition,DEFAULT_DISTANCE_OFFSET_CM,DISTANCE_OFFSET_STORAGE_KEY,loadDistanceOffset} from './piece-models';
 import {useLab03} from './use-lab03';
 import type {Point,Report} from './use-lab03';
 import './lab03-dashboard.css';
@@ -58,11 +58,11 @@ function ReportView({report}:{report:Report}){
 export default function Lab03Dashboard(){
   const lab=useLab03();const s=lab.snapshot?.data;const live=lab.fresh?s:null;const ia=lab.ia?.data;
   const [theme,setTheme]=useState('claro'),[speed,setSpeed]=useState(50),[calc,setCalc]=useState('sincronizacion');
-  const [offsetInput,setOffsetInput]=useState('0'),[distanceOffset,setDistanceOffset]=useState(0);
+  const [offsetInput,setOffsetInput]=useState(String(DEFAULT_DISTANCE_OFFSET_CM)),[distanceOffset,setDistanceOffset]=useState(DEFAULT_DISTANCE_OFFSET_CM);
   const [calNotice,setCalNotice]=useState('');
   useEffect(()=>{if(s)setSpeed(s.porcentaje);},[s?.porcentaje]);
-  useEffect(()=>{try{const c=JSON.parse(localStorage.getItem('lab03-distance-offset-v1')||'0');
-    if(typeof c==='number'&&Number.isFinite(c)&&Math.abs(c)<=10){setDistanceOffset(c);setOffsetInput(String(c));}
+  useEffect(()=>{try{const c=loadDistanceOffset(localStorage);
+    setDistanceOffset(c);setOffsetInput(String(c));
   }catch{/* Sin calibración guardada. */}},[]);
   const can=lab.fresh&&!lab.pending&&!s?.emergencia&&!s?.ensayo;
   const direct=can&&!s?.automatico;
@@ -113,10 +113,10 @@ export default function Lab03Dashboard(){
         {calcFields[calc].map(([k,label])=><label key={k}>{label}<input name={k} type="number" required min="0" step={k==='total'||k==='buenos'?'1':'any'}/></label>)}<button className="btn" disabled={!lab.server}>Calcular</button></form>
       {lab.calculation?.calculo===calc&&<dl className="lab03-values lab03-results">{Object.entries(lab.calculation.data).map(([k,v])=><div key={k}><dt>{resultNames[k]||k}</dt><dd>{typeof v==='boolean'?v?'Sí':'No':fmt(v,4)}</dd></div>)}</dl>}
     </section>
-    <details className="panel"><summary>Calibrar la posición del objeto en el gemelo</summary><p className="ayuda">La distancia se representa desde la cara del ultrasonido hasta la superficie de la pieza, considerando el radio de la lata o la profundidad de la caja. Por ejemplo, 8,6 cm dejan 8,6 cm de separación. La lata conserva su identificación metálica durante el recorrido; ambas piezas se ocultan al perder el eco o la conexión.</p>
-      <form className="lab03-form" onSubmit={e=>{e.preventDefault();const offset=Number(offsetInput);if(!Number.isFinite(offset)||Math.abs(offset)>10){setCalNotice('Usá una corrección entre −10 y 10 cm.');return;}setDistanceOffset(offset);try{localStorage.setItem('lab03-distance-offset-v1',JSON.stringify(offset));}catch{}setCalNotice('Corrección visual aplicada.');}}>
-        <label>Corrección de distancia (cm)<input type="number" required min="-10" max="10" step="0.1" value={offsetInput} onChange={e=>setOffsetInput(e.target.value)}/></label><button className="btn">Aplicar corrección visual</button><button type="button" className="btn" onClick={()=>{setDistanceOffset(0);setOffsetInput('0');try{localStorage.removeItem('lab03-distance-offset-v1');}catch{}setCalNotice('Distancia directa del sensor restaurada.');}}>Usar distancia del sensor</button></form>
-      <p className="ayuda">{calNotice||'Distancia directa del sensor; corrección inicial: 0 cm.'} Ajustá la corrección solo si la ubicación física del sensor difiere del modelo. No cambia la medición ni el control de la ESP32.</p>
+    <details className="panel"><summary>Calibrar la posición del objeto en el gemelo</summary><p className="ayuda">La posición se calcula desde la cara del ultrasonido hasta la superficie de la pieza, considerando su profundidad. El ajuste inicial de +1,25 cm aleja la lata y la caja del sensor para coincidir con el montaje: una lectura de 8,6 cm se representa a 9,85 cm. La lata conserva su identificación metálica durante el recorrido; ambas piezas se ocultan al perder el eco o la conexión.</p>
+      <form className="lab03-form" onSubmit={e=>{e.preventDefault();const offset=Number(offsetInput);if(!Number.isFinite(offset)||Math.abs(offset)>10){setCalNotice('Usá una corrección entre −10 y 10 cm.');return;}setDistanceOffset(offset);try{localStorage.setItem(DISTANCE_OFFSET_STORAGE_KEY,JSON.stringify(offset));}catch{}setCalNotice('Corrección visual aplicada.');}}>
+        <label>Corrección de distancia (cm)<input type="number" required min="-10" max="10" step="0.01" value={offsetInput} onChange={e=>setOffsetInput(e.target.value)}/></label><button className="btn">Aplicar corrección visual</button><button type="button" className="btn" onClick={()=>{setDistanceOffset(0);setOffsetInput('0');try{localStorage.setItem(DISTANCE_OFFSET_STORAGE_KEY,'0');}catch{}setCalNotice('Distancia directa del sensor restaurada.');}}>Usar distancia del sensor</button></form>
+      <p className="ayuda">{calNotice||`Corrección visual activa: ${distanceOffset>0?'+':''}${fmt(distanceOffset,2)} cm.`} Un valor positivo aleja la pieza del sensor. No cambia la medición ni el control de la ESP32.</p>
     </details>
   </div></main>;
 }

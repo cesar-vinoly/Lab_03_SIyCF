@@ -49,3 +49,19 @@ test('pala: reposo conserva ensamble, eje fijo y barrido reversible de 60 grados
   assert.equal(paddle.getAngle(),60);
   paddle.setAngle(NaN);assert.equal(paddle.update(101100),false);
 });
+
+test('eje nuevo coincide con MG996R y taladro de Pala.step durante todo el barrido',async()=>{
+  const supports=alignClassifierModel(await load('Soportes_fusion.glb'));
+  supports.updateMatrixWorld(true);
+  let servo;supports.traverse(n=>{if(n.userData.name==='servo mg996R:1')servo=n;});
+  assert.ok(servo);
+  const axis=servo.getWorldPosition(new Vector3());axis.y-=.012;
+  assert.ok(axis.distanceTo(SERVO_PIVOT)<1e-8);
+  const model=await load('Pala_servo.glb'),paddle=createServoPaddle(model);
+  // Centro de la cara cilindrica de radio 3 mm medido en el STEP (metros, Z arriba).
+  const hole=new Vector3(.00872809796106124,.328,.171);
+  for(const angle of [0,30,60,0]){
+    paddle.synchronizeAngle(angle);paddle.group.updateMatrixWorld(true);
+    assert.ok(model.localToWorld(hole.clone()).distanceTo(axis)<1e-8);
+  }
+});

@@ -1,7 +1,7 @@
 {
   "source": "Soportes.step",
-  "source_sha256": "efd08886dd4a82bc110110ab2fdbe638be045bb41ccb12a7d1cb2ca29dba2534",
-  "output_sha256": "eee4dba41cb53a294bdc3743cca2d6deb2638528a0d9fe7ae269e2980f5e0e61",
+  "source_sha256": "01675197b270b75e2f5cfccad9c8b87a222840b05fa223986a3c88301d85952d",
+  "output_sha256": "be10975698fa74a47b23c955745b9e175d6fdb32b2745f2b965352d2dab244d2",
   "converter": "OpenCascade / cadquery-ocp 7.9.3.1.1",
   "linear_deflection_mm": 0.05,
   "angular_deflection_rad": 0.25,

@@ -1,5 +1,54 @@
 # Cinta clasificadora · Lab 03 SIyCF
 
+## OLED local restaurada (Laboratorio 01)
+
+La SSD1306 de 128x64 vuelve a mostrar la vista de seis renglones del Lab 01,
+con la misma fuente, orientacion y conexiones: **SDA GPIO21, SCL GPIO22,
+direccion I2C 0x3C, VCC 3,3 V y GND**. No necesita un servidor para dibujar.
+
+```text
+FWD V:50% M:8
+RPM T:35.6 R:35.6
+cm/s T:5.5 R:5.5
+Pos:4.6cm
+Err:0.0% OK
+HC:OK WF:OK WS:OK
+```
+
+- `FWD`, `REV` y `STOP`: sentido de la marcha ordenada; `V` es el porcentaje
+  seleccionado en directo y el equivalente de la consigna automatica sobre
+  150 RPM (80 RPM = 53 % redondeado). `M:8` indica 1/8 de micropaso.
+- `RPM` son del **rodillo**, igual que en Lab 01. `T` se calcula desde la
+  frecuencia STEP realmente aplicada; `R` proviene del encoder, convirtiendo
+  las RPM de motor de la telemetria mediante la relacion 19/40. `T` no es RPM_TS.
+- `cm/s` conserva el diametro de rodillo de **29,5 mm** del codigo original.
+  `Pos` conserva su offset de **4 cm** y recorrido de **45 cm**; no es la distancia
+  cruda del HC-SR04. Estas tres calibraciones se pueden cambiar en las constantes
+  `OLED_DIAMETRO_RODILLO_MM`, `OLED_OFFSET_HC_CM` y `OLED_LONGITUD_BANDA_CM`
+  de `main/configuracion.h`, sin cambiar los umbrales de clasificacion ni el gemelo.
+- Sin lectura valida se presenta `--.-`; no se inventa una velocidad medida
+  de cero. `HC` informa si hay un eco valido, aunque el reflector quede fuera
+  del recorrido de `Pos`. Un fondo distante, como la silla, no se dibuja como posicion.
+- `Err` compara RPM teoricas y reales, con aviso local `DIVERG` sobre 15 %
+  despues de 1,5 s en regimen (como el margen del Lab 01). No sustituye la alarma
+  RPM/TS del servidor ni genera ordenes. Tambien muestra `RAMP`, `S/ENC`,
+  `ENSAYO` o `FALLA`, segun el estado recibido.
+- La antigua referencia `BT:CINTA_UTEC` se reemplaza por `WF` (Wi-Fi con IP)
+  y `WS` (permiso del gemelo vigente). Cada uno muestra `OK` o `--`.
+
+La tarea `oled` trabaja en **CPU0, prioridad 1**, con actualizacion cada 200 ms.
+El control en CPU1 publica una copia por cola de una posicion, sin espera.
+Todas las operaciones I2C ocurren en la tarea OLED con timeout limitado.
+Si la pantalla no responde se reintenta cada 5 s sin reiniciar ni detener el
+control. Si dejan de llegar estados durante mas de 1 s, muestra `DATOS VENCIDOS`.
+En `PRUEBA_SOLO_SERVO=1` se conserva el ensayo existente sin iniciar la OLED.
+
+Verificacion sin compilacion: `node cinta_clasificadora/tests/test_pantalla.cjs`
+desde la raiz comprueba las conversiones y el formato interpretando esas funciones
+C en JavaScript. La compilacion y la prueba en la pantalla fisica quedan a cargo
+del usuario. Fuente original:
+[OLED del Lab 01](https://github.com/cesar-vinoly/Lab-1-Sistemas-inteligentes-y-ciber-f-sicos/blob/main/codigo_esp/Cinta%20trasportadora/main/main.c).
+
 ESP32-WROOM-32D, ESP-IDF 6.0.1, TMC2208, encoder de rodillo, HC-SR04, inductivo activo en bajo y servo MG996R posicional. El firmware funciona en la ESP32 de forma autónoma. Se clasifica una pieza por ciclo; la clasificación queda fijada durante el transporte.
 
 La versión actual agrega una espera de colocación de 1 s, Wi-Fi y capturas para la Tiny IA supervisora. Configurá SSID, clave e IP de la PC únicamente en `main/configuracion_red.h`. El receptor, el panel de etiquetado y el entrenamiento están en [servidor_tinyia](../servidor_tinyia/README.md). Sin SSID o sin servidor, el modo automático sigue operando; la red nunca bloquea el bucle de control.

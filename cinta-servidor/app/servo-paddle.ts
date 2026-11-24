@@ -6,8 +6,9 @@ export function alignClassifierModel(model:Object3D){
   const aligned=new Group();aligned.rotation.x=Math.PI/2;aligned.add(model);
   return aligned;
 }
-// Centro del eje MG996R medido en los GLB nuevos, convertido al sistema CAD.
-export const SERVO_PIVOT = new Vector3(.0145,-.171,.3025);
+// Eje del acople en Pala.step (23/11/2026): X=8,728098; Y=328; Z=171 mm.
+// Coincide con el MG996R de Soportes.step; convertir Z vertical a -Y vertical.
+export const SERVO_PIVOT = new Vector3(.00872809796106124,-.171,.328);
 export const SERVO_SWEEP_DEG = 60;
 export function createServoPaddle(model:Object3D){
   const pivot=new Group();pivot.name='pivote_pala_servo';pivot.position.copy(SERVO_PIVOT);

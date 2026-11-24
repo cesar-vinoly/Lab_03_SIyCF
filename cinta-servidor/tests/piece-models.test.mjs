@@ -3,7 +3,7 @@ import assert from 'node:assert/strict';
 import {readFile} from 'node:fs/promises';
 import {Box3,Vector3} from 'three';
 import {GLTFLoader} from 'three/addons/loaders/GLTFLoader.js';
-import {createPieceModels,piecePosition,ULTRASONIC_FACE_Z} from '../app/piece-models.ts';
+import {createPieceModels,piecePosition,ULTRASONIC_FACE_Z,loadDistanceOffset,DISTANCE_OFFSET_STORAGE_KEY} from '../app/piece-models.ts';
 import {alignClassifierModel} from '../app/servo-paddle.ts';
 
 async function model(name){
@@ -29,12 +29,29 @@ test('STEP reales: escala en metros, modelos centrados y apoyados sin offsets de
     assert.equal(piece.mesh.children.filter(c=>c.visible).length,1);
   }
 });
-test('distancia directa, corrección y ausencia no crean piezas con eco inválido',()=>{
-  close(piecePosition(8.6),8.6);close(piecePosition(47.5),47.5);
+test('correccion inicial +1,25 cm y ausencia no crean piezas con eco invalido',()=>{
+  close(piecePosition(8.6),9.85);close(piecePosition(47.5),48.75);
   close(piecePosition(20,1),21);
   for(const cm of [null,undefined,NaN,Infinity,114,0,-5])assert.equal(piecePosition(cm),null);
-  close(piecePosition(50),50);close(piecePosition(8),8);
+  close(piecePosition(50),51.25);close(piecePosition(8),9.25);
+  close(piecePosition(8.6,0),8.6);
   assert.equal(piecePosition(8.6,NaN),null);
+});
+
+test('calibracion guardada: migrar +2,5 y cero v1, conservar ajustes y cero explicito nuevo',()=>{
+  const storage=(values={})=>({getItem:key=>values[key]??null});
+  close(loadDistanceOffset(storage()),1.25);
+  close(loadDistanceOffset(storage({'lab03-distance-offset-v1':'0'})),1.25);
+  close(loadDistanceOffset(storage({'lab03-distance-offset-v1':'2.5'})),1.25);
+  close(loadDistanceOffset(storage({'lab03-distance-offset-v2':'2.5'})),1.25);
+  close(loadDistanceOffset(storage({'lab03-distance-offset-v2':'0'})),0);
+  close(loadDistanceOffset(storage({'lab03-distance-offset-v2':'1.5'})),1.5);
+  close(loadDistanceOffset(storage({[DISTANCE_OFFSET_STORAGE_KEY]:'2.5','lab03-distance-offset-v2':'0'})),2.5);
+  close(loadDistanceOffset(storage({'lab03-distance-offset-v1':'1.2'})),1.2);
+  close(loadDistanceOffset(storage({[DISTANCE_OFFSET_STORAGE_KEY]:'0','lab03-distance-offset-v1':'2.5'})),0);
+  close(loadDistanceOffset(storage({[DISTANCE_OFFSET_STORAGE_KEY]:'-1'})),-1);
+  for(const value of ['bad','null','"2.5"','20'])close(loadDistanceOffset(storage({[DISTANCE_OFFSET_STORAGE_KEY]:value})),1.25);
+  close(loadDistanceOffset({getItem(){throw Error('Almacenamiento bloqueado');}}),1.25);
 });
 test('solo la variante detectada aparece; suavizado no recrea ni escala geometría',async()=>{
   const {piece,models}=await fixture();
@@ -52,7 +69,7 @@ test('solo la variante detectada aparece; suavizado no recrea ni escala geometr�
   assert.deepEqual(after,geometry);
   close(models.lata.scale.x,1);close(models.caja.scale.x,1);
 });
-test('8,6 cm separan la cara CAD del HC-SR04 de la superficie de cada pieza',async()=>{
+test('8,6 cm mas la correccion de 1,25 cm separan sensor y superficie de lata y caja',async()=>{
   const supports=alignClassifierModel(await model('Soportes_fusion'));
   supports.updateMatrixWorld(true);
   let faces=0;
@@ -64,10 +81,10 @@ test('8,6 cm separan la cara CAD del HC-SR04 de la superficie de cada pieza',asy
   assert.equal(faces,2,'Las dos rejillas definen la referencia del sensor');
   const {piece,models}=await fixture();
   for(const kind of ['lata','caja']){
-    piece.setPosition(8.6,0,kind);piece.mesh.updateMatrixWorld(true);
+    piece.setPosition(piecePosition(8.6),0,kind);piece.mesh.updateMatrixWorld(true);
     const front=new Box3().setFromObject(models[kind]).min.z;
-    close(front-ULTRASONIC_FACE_Z,.086);
-    piece.setPosition(null,1,kind);piece.setPosition(9.6,2,kind);piece.mesh.updateMatrixWorld(true);
+    close(front-ULTRASONIC_FACE_Z,.0985);
+    piece.setPosition(null,1,kind);piece.setPosition(piecePosition(9.6),2,kind);piece.mesh.updateMatrixWorld(true);
     close(new Box3().setFromObject(models[kind]).min.z-front,.01);
   }
 });

@@ -5,7 +5,26 @@ export type PieceKind='lata'|'caja';
 // Cara frontal de las rejillas HC_SR04_gitter_001/002 en Soportes_fusion.glb,
 // después de adaptar Z vertical de Fusion a -Y vertical del ensamble.
 export const ULTRASONIC_FACE_Z=.00828000004768419;
-export function piecePosition(cm:number|null|undefined,offsetCm=0):number|null{
+// Ajuste visual afinado en el montaje: +1,25 cm (la correccion anterior era +2,5).
+// Positivo aleja lata y caja del ultrasonido; no cambia dist_cm ni el firmware.
+export const DEFAULT_DISTANCE_OFFSET_CM=1.25;
+export const DISTANCE_OFFSET_STORAGE_KEY='lab03-distance-offset-v3';
+export function loadDistanceOffset(storage:Pick<Storage,'getItem'>):number{
+  try{
+    let version=3,raw=storage.getItem(DISTANCE_OFFSET_STORAGE_KEY);
+    if(raw===null){version=2;raw=storage.getItem('lab03-distance-offset-v2');}
+    if(raw===null){version=1;raw=storage.getItem('lab03-distance-offset-v1');}
+    const saved=JSON.parse(raw??'null');
+    if(typeof saved==='number'&&Number.isFinite(saved)&&Math.abs(saved)<=10){
+      // Migrar el +2,5 anterior y el cero predeterminado de v1.
+      // Conservar otros ajustes y el cero elegido explicitamente desde v2.
+      // En v3 incluso +2,5 puede volver a elegirse manualmente.
+      return (version<3&&saved===2.5)||(version===1&&saved===0)?DEFAULT_DISTANCE_OFFSET_CM:saved;
+    }
+  }catch{/* Almacenamiento bloqueado o configuracion invalida: usar calibracion del montaje. */}
+  return DEFAULT_DISTANCE_OFFSET_CM;
+}
+export function piecePosition(cm:number|null|undefined,offsetCm=DEFAULT_DISTANCE_OFFSET_CM):number|null{
   if(cm==null||!Number.isFinite(cm)||cm<2||cm>60)return null;
   if(!Number.isFinite(offsetCm)||Math.abs(offsetCm)>10||cm+offsetCm<0)return null;
   return cm+offsetCm;
