@@ -1,0 +1,256 @@
+2026-11-13 23:26:48,607-0300 INFO  pdflatex - this process (28836) started by pwsh in directory C:\Users\cesar\Desktop\Lab_03_SIyCF with command line: C:\Users\cesar\AppData\Local\Programs\MiKTeX\miktex\bin\x64\pdflatex.exe --version
+2026-11-13 23:26:48,607-0300 INFO  pdflatex - running on Windows 10.0.26200
+2026-11-13 23:26:48,607-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,607-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,608-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,608-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,608-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,608-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,608-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,608-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,608-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,608-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,608-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,608-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,608-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,608-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Setup
+2026-11-13 23:26:48,608-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,608-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,608-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,608-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,608-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,608-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,608-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,608-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,608-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,608-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,609-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,610-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,610-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,610-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,610-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,610-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,610-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,610-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,610-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,610-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,610-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,610-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,610-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+2026-11-13 23:26:48,610-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,610-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,610-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,610-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,610-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+2026-11-13 23:26:48,610-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,611-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,611-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,611-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,611-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+2026-11-13 23:26:48,611-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,611-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,611-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,611-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,611-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+2026-11-13 23:26:48,611-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,611-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,612-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,612-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,612-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+2026-11-13 23:26:48,612-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,612-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,612-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,612-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,612-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+2026-11-13 23:26:48,612-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,613-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,613-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,613-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,613-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,613-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,613-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,613-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,613-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,613-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,613-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,614-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,614-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,614-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,614-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,614-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,621-0300 WARN  pdflatex - security risk: running with elevated privileges
+2026-11-13 23:26:48,621-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,621-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,621-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,621-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,622-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,622-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,622-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,622-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,622-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,622-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,622-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,622-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,622-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,622-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,622-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,622-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,623-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,623-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,623-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,623-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,623-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,623-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,623-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,623-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,623-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,623-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,623-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,623-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,623-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,623-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,624-0300 INFO  pdflatex - this process (28836) finishes with exit code 1
+2026-11-13 23:26:48,626-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,626-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,626-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,626-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+2026-11-13 23:26:48,626-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,627-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,627-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,627-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,627-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+2026-11-13 23:26:48,627-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,627-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,627-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,627-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,627-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+2026-11-13 23:26:48,627-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,627-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,628-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,628-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,628-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+2026-11-13 23:26:48,628-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,628-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,628-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,628-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,628-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+2026-11-13 23:26:48,628-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,628-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,628-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,628-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,628-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+2026-11-13 23:26:48,628-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,629-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,629-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,629-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,629-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+2026-11-13 23:26:48,629-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,629-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,629-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,629-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,629-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+2026-11-13 23:26:48,629-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,629-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,629-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,630-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,630-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\MPM
+2026-11-13 23:26:48,630-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,630-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,630-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,630-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,630-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,630-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,631-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,631-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,631-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,631-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,631-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,631-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,631-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,631-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,631-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,631-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,634-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,634-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,634-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,634-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,634-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,634-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,635-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,635-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,635-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,635-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,635-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,635-0300 ERROR pdflatex.core - Function: RegOpenKeyExW
+2026-11-13 23:26:48,635-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,635-0300 ERROR pdflatex.core - Data: Software\MiKTeX.org\MiKTeX\2.9\Core
+2026-11-13 23:26:48,635-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:83
+2026-11-13 23:26:48,635-0300 ERROR pdflatex.core - Acceso denegado.
+
+2026-11-13 23:26:48,635-0300 ERROR pdflatex.core - Function: RegCreateKeyExW
+2026-11-13 23:26:48,635-0300 ERROR pdflatex.core - Result: 5
+2026-11-13 23:26:48,636-0300 ERROR pdflatex.core - Data: path="Software\MiKTeX.org\MiKTeX\2.9\Setup"
+2026-11-13 23:26:48,636-0300 ERROR pdflatex.core - Source: Libraries\MiKTeX\Core\win\winRegistry.cpp:207

@@ -1,0 +1,216 @@
+{
+  "motor": {
+    "clasico": {
+      "horizonte_s": 60.0,
+      "Ts_s": 0.019999999999999574,
+      "IAE": 208.7417000000004,
+      "ISE": 3002.0252793000086,
+      "ITAE": 4970.505355600006,
+      "esfuerzo_integral_u2": 1701905.6399999997,
+      "variacion_total_u": 15664.0,
+      "Ju": 121368.0,
+      "control_us_max": 308.0,
+      "sobreimpulso_pct": 16.671000000000014,
+      "establecimiento_s": null,
+      "subida_10_90_s": 0.8599999999999999,
+      "error_final_medio": -0.7230697674418602,
+      "banda_absoluta": 2.0,
+      "y0": 0.0,
+      "referencia": 100.0,
+      "ymax": 116.671,
+      "ymax_t": 2.3200000000000003,
+      "u_max": 248.0,
+      "error_final_std": 2.624603988880916,
+      "gain_ranges": {
+        "kp": [
+          0.8356,
+          0.8356
+        ],
+        "ki": [
+          5.498,
+          5.498
+        ],
+        "kd": [
+          0.03175,
+          0.03175
+        ]
+      },
+      "max_delta_filtrada": 10.379,
+      "IAE_normalizado": 2.087417000000004,
+      "ISE_normalizado": 0.30020252793000085,
+      "ITAE_normalizado": 49.70505355600006,
+      "modelo_rmse": 11.969218148747597,
+      "modelo_fit": -66.86735807081725,
+      "filas_totales": 3101,
+      "filas_control_cierre": 3001,
+      "control_us_mediana": 284.0,
+      "control_us_p99": 296.0,
+      "ocupacion_max_pct": 1.540000000000033
+    },
+    "hibrido": {
+      "horizonte_s": 60.0,
+      "Ts_s": 0.019999999999999574,
+      "IAE": 176.31996999999973,
+      "ISE": 2295.791087530003,
+      "ITAE": 4467.9831835999985,
+      "esfuerzo_integral_u2": 1579219.6999999995,
+      "variacion_total_u": 15419.0,
+      "Ju": 114573.0,
+      "control_us_max": 1532.0,
+      "sobreimpulso_pct": 7.187999999999994,
+      "establecimiento_s": null,
+      "subida_10_90_s": 0.5,
+      "error_final_medio": 0.27466777408637844,
+      "banda_absoluta": 2.0,
+      "y0": 0.0,
+      "referencia": 100.0,
+      "ymax": 107.188,
+      "ymax_t": 21.34,
+      "u_max": 200.0,
+      "error_final_std": 3.7547753527019463,
+      "gain_ranges": {
+        "kp": [
+          0.83569,
+          0.87886
+        ],
+        "ki": [
+          5.23489,
+          5.60734
+        ],
+        "kd": [
+          0.03175,
+          0.03209
+        ]
+      },
+      "max_delta_filtrada": 10.742333333333335,
+      "IAE_normalizado": 1.7631996999999973,
+      "ISE_normalizado": 0.2295791087530003,
+      "ITAE_normalizado": 44.679831835999984,
+      "modelo_rmse": 5.534011640696748,
+      "modelo_fit": 12.128522326291568,
+      "filas_totales": 3101,
+      "filas_control_cierre": 3001,
+      "control_us_mediana": 1484.0,
+      "control_us_p99": 1516.0,
+      "ocupacion_max_pct": 7.660000000000163
+    },
+    "reduccion_pct": {
+      "IAE": 15.531985223843925,
+      "ISE": 23.525257986324497,
+      "ITAE": 10.11008209525098,
+      "Ju": 5.598675103816492,
+      "variacion_total_u": 1.5640960163432074,
+      "esfuerzo_integral_u2": 7.208739257718202,
+      "IAE_normalizado": 15.531985223843916,
+      "ISE_normalizado": 23.525257986324494,
+      "ITAE_normalizado": 10.110082095250986
+    }
+  },
+  "termica": {
+    "clasico": {
+      "horizonte_s": 600.0,
+      "Ts_s": 1.0,
+      "IAE": 2091.590499999997,
+      "ISE": 20237.71571150005,
+      "ITAE": 255960.9450000001,
+      "esfuerzo_integral_u2": 428473.81709,
+      "variacion_total_u": 65.24000000000007,
+      "Ju": 25.792372000000043,
+      "control_us_max": 2040.0,
+      "sobreimpulso_pct": 8.764751230504665,
+      "establecimiento_s": null,
+      "subida_10_90_s": 172.0,
+      "error_final_medio": -0.5322459016393452,
+      "banda_absoluta": 0.33726,
+      "y0": 28.137,
+      "referencia": 45.0,
+      "ymax": 46.478,
+      "ymax_t": 388.0,
+      "u_max": 31.25,
+      "error_final_std": 0.137637646949967,
+      "gain_ranges": {
+        "kp": [
+          1.286,
+          1.286
+        ],
+        "ki": [
+          0.01565,
+          0.01565
+        ],
+        "kd": [
+          0.0,
+          0.0
+        ]
+      },
+      "max_delta_filtrada": 0.13569119078203531,
+      "IAE_normalizado": 124.03430587677146,
+      "ISE_normalizado": 71.16915523427934,
+      "ITAE_normalizado": 15178.849848781361,
+      "modelo_rmse": 12.863944911969327,
+      "modelo_fit": -144.29258855361135,
+      "filas_totales": 621,
+      "filas_control_cierre": 601,
+      "control_us_mediana": 2024.0,
+      "control_us_p99": 2036.0,
+      "ocupacion_max_pct": 0.20400000000000001
+    },
+    "hibrido": {
+      "horizonte_s": 600.0,
+      "Ts_s": 1.0,
+      "IAE": 1977.2289999999987,
+      "ISE": 18496.955990000024,
+      "ITAE": 237225.6820000003,
+      "esfuerzo_integral_u2": 396687.47076199995,
+      "variacion_total_u": 60.95199999999995,
+      "Ju": 23.815071999999958,
+      "control_us_max": 3200.0,
+      "sobreimpulso_pct": 8.219676304782709,
+      "establecimiento_s": null,
+      "subida_10_90_s": 173.0,
+      "error_final_medio": -0.37377049180327865,
+      "banda_absoluta": 0.32994,
+      "y0": 28.503,
+      "referencia": 45.0,
+      "ymax": 46.356,
+      "ymax_t": 412.0,
+      "u_max": 29.688,
+      "error_final_std": 0.10523234506598993,
+      "gain_ranges": {
+        "kp": [
+          1.28592,
+          1.32987
+        ],
+        "ki": [
+          0.01536,
+          0.01596
+        ],
+        "kd": [
+          0.0,
+          0.0
+        ]
+      },
+      "max_delta_filtrada": 0.14139660923669237,
+      "IAE_normalizado": 119.85385221555427,
+      "ISE_normalizado": 67.9657814165959,
+      "ITAE_normalizado": 14379.928593077548,
+      "modelo_rmse": 12.060404416941468,
+      "modelo_fit": -138.96609888376727,
+      "filas_totales": 621,
+      "filas_control_cierre": 601,
+      "control_us_mediana": 3168.0,
+      "control_us_p99": 3192.0,
+      "ocupacion_max_pct": 0.32
+    },
+    "reduccion_pct": {
+      "IAE": 5.467681173728726,
+      "ISE": 8.60156228259912,
+      "ITAE": 7.319578774019527,
+      "Ju": 7.66622007467976,
+      "variacion_total_u": 6.572654812998334,
+      "esfuerzo_integral_u2": 7.418503782536476,
+      "IAE_normalizado": 3.3704011415764943,
+      "ISE_normalizado": 4.501070452695924,
+      "ITAE_normalizado": 5.26338466789666
+    }
+  }
+}

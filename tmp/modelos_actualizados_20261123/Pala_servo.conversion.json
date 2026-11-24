@@ -1,0 +1,10 @@
+{
+  "source": "Pala.step",
+  "source_sha256": "7a1fa18bae25ca8152bb8c065e0f14122877ece68f690a8acb8d3a3bb8b8f19c",
+  "output_sha256": "15598879bbc5462f68ce99784dbc2c124c29528070b9f92241be7727851acbc1",
+  "converter": "OpenCascade / cadquery-ocp 7.9.3.1.1",
+  "linear_deflection_mm": 0.05,
+  "angular_deflection_rad": 0.25,
+  "coordinates": "Z up; meters; preserve assembly placements",
+  "colors": "XCAF surface/part colors, linear RGB in glTF; no Lab 1 palette overrides"
+}

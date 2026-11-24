@@ -1,0 +1,16 @@
+{
+  "descripcion": "Referencia de fuentes al preparar los modulos; no contiene credenciales ni datos de capturas. Comparar antes de integrar si el firmware cambia.",
+  "fecha_utc": "2026-11-08T10:03:35.937331+00:00",
+  "sha256": {
+    "cinta_clasificadora/main/main.c": "d2c1e1b2e15603d837be0e4eebdf806eadee42f62ccfa1871a9a9518b4768b69",
+    "cinta_clasificadora/main/captura.c": "e8e2d305adc027c54bd03b96f964b81139f41a6f0799b489c4b0fe5672b0cc59",
+    "cinta_clasificadora/main/captura.h": "2c706ffeefee959bb442dadcbe353de2fcafa59c5efc339d0ae140d42a0c0489",
+    "cinta_clasificadora/main/modelo_ts1_economico.h": "416c95e0e61bf6d3335bed3a8a8a565e3f1766beec9c205d9451a7249803a588",
+    "cinta_clasificadora/main/tiny_ia.cpp": "a314458df9516bb0fd19bfd07e5762c2652444dace47d17cc0359aecfef95645",
+    "cinta_clasificadora/main/hardware.c": "23cc37ed76fc2f37a4fa58d41f762f9cbf66cd3d9e77f4427cdd836a9886a628"
+  },
+  "pdf": {
+    "ruta": "C:\\Users\\cesar\\Downloads\\Laboratorio-03-Clasificador.pdf",
+    "sha256": "8f527646418e98defd5fbe3034302e1be7dd93b427ed88ba3d806b60d54a525f"
+  }
+}
